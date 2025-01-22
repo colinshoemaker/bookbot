@@ -2,8 +2,20 @@ def main():
     path = "books/frankenstein.txt"
     text = getbook(path) 
     numwords = count_words(text)
-    print(numwords)
-    print(count_characters(text))
+    numlets = count_characters(text)
+    numletlst =[]
+    for let, num in numlets.items():
+        if let.isalpha() == True:
+            char_dict = {"letter": let, "number": num}
+            numletlst.append(char_dict)
+    numletlst.sort(reverse = True, key = sort_on)
+    for k in numletlst:
+        letter = k["letter"]
+        number = k["number"]
+        print(f"The '{letter}' character was found {number} times")
+
+def sort_on(dict):
+    return dict["number"]
     
 def getbook(path):
     with open(path) as f:
@@ -24,5 +36,7 @@ def count_characters(text):
             lettd[let]=1
     return lettd
     
-    
+
+
+
 main()
